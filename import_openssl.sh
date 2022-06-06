@@ -256,7 +256,7 @@ function generate_build_config_headers() {
 
   rm -f apps/CA.pl.bak crypto/opensslconf.h.bak
   mv -f crypto/opensslconf.h crypto/opensslconf-$outname.h
-  cp -f crypto/opensslconf-$outname.h include/openssl/opensslconf-$outname.h
+  cp -f crypto/opensslconf-$outname.h src/include/openssl/opensslconf-$outname.h
 
   local tmpfile=$(mktemp tmp.XXXXXXXXXX)
   (grep -e -D Makefile | grep -v CONFIGURE_ARGS= | grep -v OPTIONS= | \
@@ -318,7 +318,7 @@ function generate_opensslconf_h() {
   echo "#endif"
   ) > crypto/opensslconf-static.h
   # move it to output include files as well
-  cp -f crypto/opensslconf-static.h include/openssl/opensslconf-static.h
+  cp -f crypto/opensslconf-static.h src/include/openssl/opensslconf-static.h
 }
 
 # Return the value of a computed variable name.
@@ -506,11 +506,11 @@ function import() {
   touch ../MODULE_LICENSE_BSD_LIKE
 
   # Avoid checking in symlinks
-  for i in `find include/openssl -type l`; do
+  for i in `find src/include/openssl -type l`; do
     target=`readlink $i`
     rm -f $i
-    if [ -f include/openssl/$target ]; then
-      cp include/openssl/$target $i
+    if [ -f src/include/openssl/$target ]; then
+      cp src/include/openssl/$target $i
     fi
   done
 

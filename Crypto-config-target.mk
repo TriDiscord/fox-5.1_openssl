@@ -539,7 +539,7 @@ common_c_includes := \
   external/openssl/crypto/evp \
   external/openssl/crypto/modes \
   external/openssl/include \
-  external/openssl/include/openssl \
+  external/openssl/src/include/openssl \
 
 arm_cflags := \
   -DAES_ASM \
